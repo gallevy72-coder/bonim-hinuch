@@ -785,10 +785,11 @@
         <h2>בואו נדבר</h2>
         <p class="contact-sub">למידע נוסף על ליווי מנהלים בבינה מלאכותית<br>ניתן להשאיר פרטים ונחזור אליך בהקדם</p>
       </div>
-      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form reveal d2" id="contact-form">
-        <input type="hidden" name="form-name" value="contact" />
-        <input type="hidden" name="subject" id="cf-subject" value="פנייה חדשה מהאתר" />
-        <p hidden><label>Don't fill: <input name="bot-field" /></label></p>
+      <form name="contact" method="POST" action="https://formsubmit.co/ajax/gallevy72@gmail.com" class="contact-form reveal d2" id="contact-form">
+        <input type="hidden" name="_subject" id="cf-subject" value="פנייה חדשה מהאתר" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
         <div class="form-field">
           <label for="cf-name">שם מלא <span class="req">*</span></label>
           <input type="text" id="cf-name" name="name" required autocomplete="name" />
@@ -873,16 +874,15 @@
       const nameVal = (form.querySelector('#cf-name')?.value || '').trim();
       const subjectField = form.querySelector('#cf-subject');
       if (subjectField) subjectField.value = nameVal ? ('פנייה חדשה מהאתר — ' + nameVal) : 'פנייה חדשה מהאתר';
-      const data = new URLSearchParams(new FormData(form)).toString();
       const btn = form.querySelector('.form-submit');
       const originalText = btn.textContent;
       btn.textContent = 'שולח...';
       btn.disabled = true;
       try {
-        const res = await fetch('/', {
+        const res = await fetch(form.action, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: data
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
         });
         if (!res.ok) throw new Error('submission failed');
         form.hidden = true;
