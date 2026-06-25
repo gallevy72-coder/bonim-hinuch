@@ -514,6 +514,36 @@
   @media(max-width:600px){.value{padding:48px 22px 76px}.value-sub{margin-bottom:32px}}
 
 </style>
+<style>
+  /* full-screen hero variant */
+  .hero-full{direction:rtl;position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;
+    background-image:linear-gradient(180deg,rgba(16,24,26,.46) 0%,rgba(16,24,26,.36) 48%,rgba(16,24,26,.28) 100%),url('hero-bg.jpg');
+    background-size:cover;background-position:center 30%;background-repeat:no-repeat}
+  .hero-full-inner{width:100%;max-width:1180px;margin:0 auto;padding:0 40px;position:relative;z-index:1;text-align:center}
+  .hero-full .hero-content{max-width:960px;margin:0 auto;text-align:center;transform:translateY(-6vh)}
+  .hero-full .hero-title{color:#fff;font-size:clamp(42px,4.4vw,64px);line-height:1.12;margin:0 0 26px;text-shadow:0 2px 18px rgba(0,0,0,.42)}
+  .hero-full .hero-title .highlight{color:#5FC6D4}
+  .hero-full .hero-subtitle{color:#F4F0E7;font-size:clamp(22px,2.6vw,34px);margin:0 auto 22px;text-shadow:0 1px 14px rgba(0,0,0,.4)}
+  .hero-full .hero-subtitle .hl{color:#5FC6D4}
+  .hero-full .hero-description{color:#ECE7DD;font-size:clamp(18px,1.55vw,22px);max-width:760px;margin:0 auto 34px;text-shadow:0 1px 14px rgba(0,0,0,.4)}
+  .hero-full .hero-description strong{color:#fff}
+  .hero-full .hero-actions{justify-content:center;margin:0 0 24px}
+  .hero-full .hero-cta{margin-top:0}
+  .hero-full .hero-cta-white{background:rgba(255,255,255,.82);color:#285F6E;border-color:rgba(255,255,255,.55);box-shadow:none}
+  .hero-full .hero-cta-white:hover{background:#fff;color:#285F6E;border-color:rgba(255,255,255,.75)}
+  .hero-full .hero-gefen{display:inline-flex;align-items:center;justify-content:center;margin-top:22px;padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:15px;font-weight:700;text-shadow:0 1px 8px rgba(0,0,0,.25)}
+  @media(max-width:768px){
+    .hero-full{min-height:auto;padding:56px 0 64px;background-position:center center}
+    .hero-full-inner{padding:0 24px}
+    .hero-full .hero-content{max-width:100%;transform:none}
+    .hero-full .hero-title{font-size:clamp(34px,9vw,46px);line-height:1.16}
+    .hero-full .hero-subtitle{font-size:22px;line-height:1.35}
+    .hero-full .hero-description{font-size:17px;line-height:1.7}
+    .hero-full .hero-actions{flex-direction:column;align-items:stretch;gap:12px}
+    .hero-full .hero-actions a{width:100%;text-align:center}
+    .hero-full .hero-gefen{font-size:14px;padding:7px 13px}
+  }
+</style>
 </head>
 <body>
 
@@ -536,22 +566,17 @@
 
 <main>
   <!-- HERO (split variation: text right / image left, RTL) -->
-  <section class="hero-split">
-    <div class="hero-split-inner">
+    <section class="hero-full">
+    <div class="hero-full-inner">
       <div class="hero-content">
         <h1 class="hero-title reveal d1"><span class="t1">מהישרדות בירוקרטית</span><br><span class="highlight">להגשמת החזון החינוכי</span></h1>
         <p class="hero-subtitle reveal d1">ליווי אישי <span class="hl">בבינה מלאכותית</span> למנהלי ומנהלות בתי&nbsp;ספר</p>
-        <p class="hero-description reveal d2"><strong>בארבעה מפגשים</strong> אישיים נבנה יחד סביבת עבודה ב-AI שמותאמת לאתגרים הניהוליים שלך פחות משימות חוזרות, יותר זמן להובלה חינוכית.</p>
+        <p class="hero-description reveal d2"><strong>בארבעה מפגשים</strong> אישיים נבנה יחד סביבת עבודה ב־AI שמותאמת לאתגרים הניהוליים שלך — פחות משימות חוזרות, יותר זמן להובלה חינוכית.</p>
         <div class="hero-actions reveal d2">
           <a href="#contact" class="hero-cta">לשיחת היכרות</a>
           <a href="#about" class="hero-cta hero-cta-white">מי אנחנו</a>
         </div>
         <p class="hero-gefen reveal d3">זמין דרך מערכת גפ״ן · מספר תוכנית 42565</p>
-      </div>
-      <div class="hero-media reveal d2">
-        <div class="hero-image-card">
-          <img src="hero-bg.jpg" alt="מנהל בית ספר בשיחת ליווי אישית עם המלווה">
-        </div>
       </div>
     </div>
   </section>
@@ -560,7 +585,6 @@
   <section class="value" id="offer">
     <div class="wrap">
       <p class="value-prompt reveal">מה יוצא לך מזה?</p>
-      <p class="value-sub reveal d1">שלושה דברים שמתחילים לקרות כשעובדים עם AI בצורה מותאמת לניהול בית הספר.</p>
       <div class="benefits-grid reveal d1">
         <div class="benefit-card">
           <div class="benefit-head">
