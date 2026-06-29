@@ -44,7 +44,7 @@
     --shadow:0 18px 50px -28px rgba(46,40,28,.35);
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth;scroll-padding-top:90px}
+  html{scroll-behavior:smooth;scroll-padding-top:90px;overflow-x:hidden;width:100%}
   .hero,.block,.contact{scroll-margin-top:90px}
   body{
     font-family:'Rubik',sans-serif;
@@ -56,6 +56,8 @@
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
     position:relative;
+    width:100%;
+    max-width:100%;
   }
   /* subtle grain atmosphere */
   body::before{
