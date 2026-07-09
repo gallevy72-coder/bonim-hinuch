@@ -876,13 +876,28 @@
   const head=document.getElementById('head');
   addEventListener('scroll',()=>{head.classList.toggle('stuck',scrollY>20)},{passive:true});
 
-  // contact form AJAX submission
+  // contact form AJAX submission (with WhatsApp fallback so a lead is never lost)
   (function(){
     const form = document.getElementById('contact-form');
     if (!form) return;
     const success = document.getElementById('form-success');
+    const WHATSAPP_NUMBER = '972525212168'; // 052-5212168 in international format
+
+    function whatsappUrl(){
+      const val = id => (form.querySelector('#' + id)?.value || '').trim();
+      const lines = [
+        'שלום, השארתי פרטים דרך האתר של בונים חינוך:',
+        'שם: ' + (val('cf-name') || '-'),
+        'טלפון: ' + (val('cf-phone') || '-'),
+      ];
+      if (val('cf-school')) lines.push('בית ספר: ' + val('cf-school'));
+      if (val('cf-message')) lines.push('הערות: ' + val('cf-message'));
+      return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
+    }
+
     form.addEventListener('submit', async function(e){
       e.preventDefault();
+      if (!form.reportValidity()) return;
       const nameVal = (form.querySelector('#cf-name')?.value || '').trim();
       const subjectField = form.querySelector('#cf-subject');
       if (subjectField) subjectField.value = nameVal ? ('פנייה חדשה מהאתר — ' + nameVal) : 'פנייה חדשה מהאתר';
@@ -890,20 +905,28 @@
       const originalText = btn.textContent;
       btn.textContent = 'שולח...';
       btn.disabled = true;
+
+      // Abort the request if the backend is slow/down so the fallback kicks in fast
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 8000);
       try {
         const res = await fetch(form.action, {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
-          body: new FormData(form)
+          body: new FormData(form),
+          signal: controller.signal
         });
+        clearTimeout(timer);
         if (!res.ok) throw new Error('submission failed');
         form.hidden = true;
         success.hidden = false;
         success.scrollIntoView({behavior:'smooth', block:'center'});
       } catch (err) {
-        btn.textContent = originalText;
-        btn.disabled = false;
-        alert('שגיאה בשליחה. אנא נסה/י שוב, או צור/צרי קשר ישירות במייל.');
+        clearTimeout(timer);
+        // Backend unavailable — hand the lead off to WhatsApp with the details pre-filled
+        btn.textContent = 'פותח וואטסאפ...';
+        window.location.href = whatsappUrl();
+        setTimeout(() => { btn.textContent = originalText; btn.disabled = false; }, 4000);
       }
     });
   })();
