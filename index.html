@@ -844,6 +844,32 @@
 </footer>
 
 <script>
+  // Reliable hash-anchor scrolling — makes direct links like /#contact land on the form.
+  // Heavy images finish loading after the browser's first jump and shift the target, so it missed.
+  (function(){
+    if('scrollRestoration' in history) history.scrollRestoration='manual'; // don't let the browser snap back to top
+    var userMoved=false;
+    ['wheel','touchstart','keydown','pointerdown'].forEach(function(ev){
+      window.addEventListener(ev,function(){userMoved=true;},{passive:true,once:true});
+    });
+    function jumpToHash(force){
+      if(!location.hash || (userMoved && !force)) return;
+      var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if(!el) return;
+      // Deep-linking skips the scroll-in animation, so reveal the target instantly (no blank fade-in).
+      if(el.classList.contains('reveal')) el.classList.add('in');
+      el.querySelectorAll('.reveal').forEach(function(r){r.classList.add('in');});
+      var root=document.documentElement, prev=root.style.scrollBehavior;
+      root.style.scrollBehavior='auto';            // instant + accurate landing
+      el.scrollIntoView({block:'start'});
+      root.style.scrollBehavior=prev||'';
+    }
+    // Retry across the moments the page can still grow (images/fonts settling).
+    window.addEventListener('DOMContentLoaded',function(){jumpToHash();});
+    window.addEventListener('load',function(){ jumpToHash(); [150,400,800].forEach(function(d){setTimeout(jumpToHash,d);}); });
+    window.addEventListener('hashchange',function(){jumpToHash(true);}); // manual clicks always win
+  })();
+
   // staggered scroll reveals
   const io=new IntersectionObserver((es)=>{
     es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
