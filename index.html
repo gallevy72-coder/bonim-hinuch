@@ -214,6 +214,55 @@
   .phase-arrow{display:flex;align-items:center;justify-content:center;color:var(--mist);font-size:26px;line-height:1;padding:8px 0}
   .phase-arrow::before{content:"↓"}
   @media(min-width:760px){.phases{flex-direction:row;align-items:stretch;gap:10px}.phase{flex:1;padding:42px 22px 32px}.phase-arrow{flex:0 0 auto;padding:0 4px;align-self:center;font-size:22px}.phase-arrow::before{content:"←"}}
+  /* JOURNEY MAP */
+  .journey{margin-top:34px;display:flex;flex-direction:column;gap:0}
+  .jrow{display:grid;grid-template-columns:88px 1fr;gap:22px}
+  .jrail{position:relative}
+  .jrail::before{content:"";position:absolute;top:0;bottom:0;right:43px;width:2px;background:var(--jc);opacity:.30}
+  .jmark{position:absolute;top:3px;right:0;width:88px;text-align:center}
+  .jdial{width:54px;height:54px;border-radius:50%;background:var(--jc);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Rubik',sans-serif;font-weight:700;font-size:22px;margin:0 auto 5px}
+  .jmark small{display:block;font-size:11px;letter-spacing:.08em;font-weight:700;color:var(--ink-soft)}
+  .jblock{border:2px solid var(--jc);border-radius:18px;overflow:hidden;background:var(--card)}
+  .jblock.dashed{border-style:dashed}
+  .jbar{width:100%;border:none;font:inherit;cursor:pointer;background:var(--jc);padding:15px 20px;display:flex;align-items:center;gap:14px;text-align:right;transition:filter .2s}
+  .jbar:hover{filter:brightness(1.07)}
+  .jbar:focus-visible{outline:3px solid #fff;outline-offset:-5px}
+  .jbar .jname{font-family:'Rubik',sans-serif;font-weight:700;font-size:20px;color:#fff;flex:1;line-height:1.25}
+  .jbar .jcount{font-family:'Rubik',sans-serif;font-size:14.5px;font-weight:600;color:#fff;opacity:.92;white-space:nowrap}
+  .jchevron{width:9px;height:9px;border-right:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(45deg);transition:transform .3s ease;flex:0 0 auto;margin-top:-4px}
+  .jblock.open .jchevron{transform:rotate(-135deg);margin-top:4px}
+  .jcollapse{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease}
+  .jblock.open .jcollapse{grid-template-rows:1fr}
+  .jcollapse>.jcwrap{overflow:hidden;min-height:0}
+  .jpad{padding:18px 22px 22px;background:var(--jtint)}
+  .jkind{margin:0 0 15px;font-size:15px;color:var(--jdeep);font-weight:600}
+  .jmeets{display:flex;gap:16px;flex-wrap:wrap}
+  .jmeet{flex:1 1 175px;border-radius:14px;padding:16px 18px;background:#fff;border:1.5px solid var(--jc)}
+  .jnums{display:flex;gap:6px;margin-bottom:10px}
+  .jnums b{width:28px;height:28px;border-radius:50%;background:var(--jc);color:#fff;font-family:'Rubik',sans-serif;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .jmeet .jt{font-family:'Rubik',sans-serif;font-weight:600;font-size:18px;line-height:1.35;color:var(--ink)}
+  .jmeet.wide{flex:2 1 360px}
+  .jpills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .jpills span{font-size:13.5px;font-weight:600;padding:5px 13px;border-radius:999px;background:var(--jtint);color:var(--jdeep)}
+  .jchoose{font-size:13.5px;color:var(--ink-soft);margin-top:12px}
+  .jhint{font-size:14.5px;color:var(--ink-soft);margin:2px 0 0}
+  .jgate{display:grid;grid-template-columns:88px 1fr;gap:22px;align-items:center;min-height:60px;--jc:#C9821B}
+  .jgate .jrail{min-height:60px}
+  .jgate .jdiamond{position:absolute;top:50%;right:36px;transform:translateY(-50%) rotate(45deg);width:14px;height:14px;background:var(--jc)}
+  .jgate p{margin:0;font-size:15.5px;color:var(--ink-soft)}
+  .jgate p b{font-weight:700;color:#A96A12}
+  .jA{--jc:#357E8F;--jtint:#EAF3F4;--jdeep:#204C58}
+  .jB{--jc:#285F6E;--jtint:#E8F0F1;--jdeep:#173842}
+  .jC{--jc:#A96A12;--jtint:#F8EFD8;--jdeep:#6E4409}
+  @media(max-width:720px){
+    .jrow,.jgate{grid-template-columns:1fr;gap:12px}
+    .jrail::before{display:none}
+    .jmark{position:static;transform:none;width:auto;display:flex;align-items:center;gap:12px;margin-bottom:2px}
+    .jdial{width:44px;height:44px;font-size:18px;margin:0}
+    .jgate .jdiamond{display:none}
+    .jgate{min-height:0}
+    .jgate .jrail{min-height:0;display:none}
+  }
   .rhythm{margin-top:40px;font-size:17px;color:var(--ink-soft);text-align:center;font-style:italic;max-width:620px;margin-inline:auto}
 
   /* testimonials */
@@ -529,15 +578,15 @@
 <style>
   /* full-screen hero variant */
   .hero-full{direction:rtl;position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;
-    background-image:linear-gradient(180deg,rgba(16,24,26,.46) 0%,rgba(16,24,26,.36) 48%,rgba(16,24,26,.28) 100%),url('hero-bg.jpg');
+    background-image:linear-gradient(180deg,rgba(16,24,26,.62) 0%,rgba(16,24,26,.50) 30%,rgba(16,24,26,.34) 62%,rgba(16,24,26,.16) 100%),url('hero-bg.jpg');
     background-size:cover;background-position:center 30%;background-repeat:no-repeat}
   .hero-full-inner{width:100%;max-width:1180px;margin:0 auto;padding:0 40px;position:relative;z-index:1;text-align:center}
   .hero-full .hero-content{max-width:960px;margin:0 auto;text-align:center;transform:translateY(-6vh)}
-  .hero-full .hero-title{color:#fff;font-size:clamp(42px,4.4vw,64px);line-height:1.12;margin:0 0 26px;text-shadow:0 2px 18px rgba(0,0,0,.42)}
-  .hero-full .hero-title .highlight{color:#5FC6D4}
-  .hero-full .hero-subtitle{color:#F4F0E7;font-size:clamp(22px,2.6vw,34px);margin:0 auto 22px;text-shadow:0 1px 14px rgba(0,0,0,.4)}
-  .hero-full .hero-subtitle .hl{color:#5FC6D4}
-  .hero-full .hero-description{color:#ECE7DD;font-size:clamp(18px,1.55vw,22px);max-width:760px;margin:0 auto 34px;text-shadow:0 1px 14px rgba(0,0,0,.4)}
+  .hero-full .hero-title{color:#fff;font-size:clamp(42px,4.4vw,64px);line-height:1.12;margin:0 0 26px;text-shadow:0 2px 8px rgba(0,0,0,.5),0 2px 24px rgba(0,0,0,.32)}
+  .hero-full .hero-title .highlight{color:#8AE4F2}
+  .hero-full .hero-subtitle{color:#F4F0E7;font-size:clamp(22px,2.6vw,34px);margin:0 auto 22px;text-shadow:0 2px 8px rgba(0,0,0,.5),0 1px 18px rgba(0,0,0,.3)}
+  .hero-full .hero-subtitle .hl{color:#8AE4F2}
+  .hero-full .hero-description{color:#E5E7EB;font-size:clamp(18px,1.55vw,22px);max-width:760px;margin:0 auto 34px;text-shadow:0 2px 8px rgba(0,0,0,.45),0 1px 16px rgba(0,0,0,.28)}
   .hero-full .hero-description strong{color:#fff}
   .hero-full .hero-actions{justify-content:center;margin:0 0 24px}
   .hero-full .hero-cta{margin-top:0}
@@ -583,7 +632,7 @@
       <div class="hero-content">
         <h1 class="hero-title reveal d1"><span class="t1">מהישרדות בירוקרטית</span><br><span class="highlight">להגשמת החזון החינוכי</span></h1>
         <p class="hero-subtitle reveal d1">ליווי אישי <span class="hl">בבינה מלאכותית</span> למנהלי ומנהלות בתי&nbsp;ספר</p>
-        <p class="hero-description reveal d2"><strong>בארבעה מפגשים</strong> אישיים נבנה יחד סביבת עבודה ב־AI שמותאמת לאתגרים הניהוליים שלך — פחות משימות חוזרות, יותר זמן להובלה חינוכית.</p>
+        <p class="hero-description reveal d2"><strong>החל מארבעה מפגשים</strong> אישיים נבנה יחד סביבת עבודה ב־AI שמותאמת לאתגרים הניהוליים שלך — פחות משימות חוזרות, יותר זמן להובלה חינוכית.</p>
         <div class="hero-actions reveal d2">
           <a href="#contact" class="hero-cta">לשיחת היכרות</a>
           <a href="#about" class="hero-cta hero-cta-white">מי אנחנו</a>
@@ -657,31 +706,87 @@
   <section class="block" id="how">
     <div class="wrap">
       <div class="kicker reveal">איך זה עובד</div>
-      <h2 class="reveal" style="color:var(--ink)">ארבע פגישות ויצאת לדרך</h2>
-      <div class="phases">
-        <div class="phase reveal d1">
-          <span class="phase-badge">1</span>
-          <div class="phase-icon"><svg viewBox='0 0 48 48' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M30 5h13v9h-3l-2 3v-3h-8z'/><circle cx='24' cy='20' r='4.5'/><path d='M14 38c0-5.5 4.5-10 10-10s10 4.5 10 10'/><circle cx='13' cy='23' r='3'/><path d='M7 38c0-3.5 2.7-6.5 6-6.5'/><circle cx='35' cy='23' r='3'/><path d='M41 38c0-3.5-2.7-6.5-6-6.5'/></svg></div>
-          <h3>מיפוי צרכים • תיעדוף</h3>
+      <h2 class="reveal">מסלול גמיש, בקצב שלך</h2>
+      <p class="lead-p reveal" style="margin-bottom:6px">מתחילים מבסיס איתן, ואחרי כל בלוק מחליטים יחד אם לעצור כאן או להמשיך הלאה.</p>
+      <p class="jhint reveal">לחצו על כל בלוק כדי לפתוח את הפירוט ›</p>
+
+      <div class="journey">
+
+        <div class="jrow jA reveal d1">
+          <div class="jrail"><div class="jmark"><div class="jdial">4</div><small>מפגשים</small></div></div>
+          <div class="jblock">
+            <button class="jbar" type="button" aria-expanded="false" aria-controls="jc-a">
+              <span class="jname">בלוק א׳ · בסיס</span>
+              <span class="jcount">4 מפגשים</span>
+              <span class="jchevron" aria-hidden="true"></span>
+            </button>
+            <div class="jcollapse" id="jc-a"><div class="jcwrap"><div class="jpad">
+              <p class="jkind">להכיר, לבנות סביבה, ולעשות דבר אחד מההתחלה עד הסוף</p>
+              <div class="jmeets">
+                <div class="jmeet"><div class="jnums"><b>1</b></div><div class="jt">מיפוי + ביצוע משימה קטנה</div></div>
+                <div class="jmeet"><div class="jnums"><b>2</b></div><div class="jt">בניית סביבת עבודה</div></div>
+                <div class="jmeet wide">
+                  <div class="jnums"><b>3</b><b>4</b></div>
+                  <div class="jt">משימה אחת, מהתחלה עד הסוף</div>
+                  <div class="jpills"><span>סוכן בסיסי</span><span>תוכנית עבודה</span><span>ארגון מידע</span></div>
+                  <div class="jchoose">בוחרים אחת. אלה דוגמאות — אפשר גם משהו אחר.</div>
+                </div>
+              </div>
+            </div></div></div>
+          </div>
         </div>
-        <div class="phase-arrow reveal d1" aria-hidden="true"></div>
-        <div class="phase reveal d2">
-          <span class="phase-badge">2</span>
-          <div class="phase-icon"><svg viewBox='0 0 48 48' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M24 4a7 7 0 0 0-4 12.7l1 2.3v2.5h6v-2.5l1-2.3A7 7 0 0 0 24 4z'/><path d='M22 23.5h4M22.5 26h3'/><path d='M11 8l2.5 2.5M37 8l-2.5 2.5M9 17h3M36 17h3'/><path d='M8 33l16-3 16 3v8l-16 3-16-3z'/><path d='M24 30v14'/></svg></div>
-          <h3>חשיפה • למידה • הקנייה</h3>
+
+        <div class="jgate reveal d2">
+          <div class="jrail"><div class="jdiamond"></div></div>
+          <p><b>נקודת החלטה.</b> לסיים כאן, או להמשיך לבלוק הבא.</p>
         </div>
-        <div class="phase-arrow reveal d2" aria-hidden="true"></div>
-        <div class="phase reveal d3">
-          <span class="phase-badge">3</span>
-          <div class="phase-icon"><svg viewBox='0 0 48 48' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'><path d='M10 18h6v-3.5a3 3 0 0 1 6 0V18h6v6h3.5a3 3 0 0 1 0 6H28v6H10v-6h3.5a3 3 0 0 0 0-6H10z'/><path d='M34 6h7v3a2 2 0 0 0 0 4v3h-7v-3a2 2 0 0 1 0-4z'/></svg></div>
-          <h3>בניית סביבת עבודה</h3>
+
+        <div class="jrow jB reveal d2">
+          <div class="jrail"><div class="jmark"><div class="jdial">2</div><small>מפגשים</small></div></div>
+          <div class="jblock">
+            <button class="jbar" type="button" aria-expanded="false" aria-controls="jc-b">
+              <span class="jname">בלוק ב׳ · מתקדם</span>
+              <span class="jcount">2 מפגשים</span>
+              <span class="jchevron" aria-hidden="true"></span>
+            </button>
+            <div class="jcollapse" id="jc-b"><div class="jcwrap"><div class="jpad">
+              <p class="jkind">פרויקט אחד עם השפעה מערכתית</p>
+              <div class="jmeets">
+                <div class="jmeet wide">
+                  <div class="jnums"><b>5</b><b>6</b></div>
+                  <div class="jt">פרויקט מתקדם</div>
+                  <div class="jpills"><span>איסוף ועיבוד נתונים</span><span>בניית אפליקציה</span><span>בניית סוכנים</span></div>
+                  <div class="jchoose">בוחרים אחד. אלה דוגמאות לדברים שאפשר לעשות בשלב הזה.</div>
+                </div>
+              </div>
+            </div></div></div>
+          </div>
         </div>
-        <div class="phase-arrow reveal d3" aria-hidden="true"></div>
-        <div class="phase reveal d4">
-          <span class="phase-badge">4</span>
-          <div class="phase-icon"><svg viewBox='0 0 48 48' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 40L17 22L23 30L29 18L43 40Z'/><path d='M26 22L29 18L32 22'/><path d='M29 18V8'/><path d='M29 8l8 2l-8 2z'/></svg></div>
-          <h3>יישום על אתגרים בבית הספר</h3>
+
+        <div class="jgate reveal d3">
+          <div class="jrail"><div class="jdiamond"></div></div>
+          <p><b>נקודת החלטה.</b> לסיים כאן, או להרחיב את זה לצוות.</p>
         </div>
+
+        <div class="jrow jC reveal d3">
+          <div class="jrail"><div class="jmark"><div class="jdial">3</div><small>מפגשים</small></div></div>
+          <div class="jblock dashed">
+            <button class="jbar" type="button" aria-expanded="false" aria-controls="jc-c">
+              <span class="jname">בלוק ג׳ · הרחבה לצוות</span>
+              <span class="jcount">3 מפגשים</span>
+              <span class="jchevron" aria-hidden="true"></span>
+            </button>
+            <div class="jcollapse" id="jc-c"><div class="jcwrap"><div class="jpad">
+              <p class="jkind">מפגשים עם אנשי בית הספר</p>
+              <div class="jmeets">
+                <div class="jmeet"><div class="jnums"><b>7</b></div><div class="jt">הכנה</div></div>
+                <div class="jmeet"><div class="jnums"><b>8</b></div><div class="jt">הנהלה</div></div>
+                <div class="jmeet"><div class="jnums"><b>9</b></div><div class="jt">צוות</div></div>
+              </div>
+            </div></div></div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -844,32 +949,6 @@
 </footer>
 
 <script>
-  // Reliable hash-anchor scrolling — makes direct links like /#contact land on the form.
-  // Heavy images finish loading after the browser's first jump and shift the target, so it missed.
-  (function(){
-    if('scrollRestoration' in history) history.scrollRestoration='manual'; // don't let the browser snap back to top
-    var userMoved=false;
-    ['wheel','touchstart','keydown','pointerdown'].forEach(function(ev){
-      window.addEventListener(ev,function(){userMoved=true;},{passive:true,once:true});
-    });
-    function jumpToHash(force){
-      if(!location.hash || (userMoved && !force)) return;
-      var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
-      if(!el) return;
-      // Deep-linking skips the scroll-in animation, so reveal the target instantly (no blank fade-in).
-      if(el.classList.contains('reveal')) el.classList.add('in');
-      el.querySelectorAll('.reveal').forEach(function(r){r.classList.add('in');});
-      var root=document.documentElement, prev=root.style.scrollBehavior;
-      root.style.scrollBehavior='auto';            // instant + accurate landing
-      el.scrollIntoView({block:'start'});
-      root.style.scrollBehavior=prev||'';
-    }
-    // Retry across the moments the page can still grow (images/fonts settling).
-    window.addEventListener('DOMContentLoaded',function(){jumpToHash();});
-    window.addEventListener('load',function(){ jumpToHash(); [150,400,800].forEach(function(d){setTimeout(jumpToHash,d);}); });
-    window.addEventListener('hashchange',function(){jumpToHash(true);}); // manual clicks always win
-  })();
-
   // staggered scroll reveals
   const io=new IntersectionObserver((es)=>{
     es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
@@ -969,5 +1048,17 @@
     });
   })();
 </script>
+  <script>
+  (function(){
+    var bars = document.querySelectorAll('#how .jbar');
+    bars.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var block = btn.closest('.jblock');
+        var open = block.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+  })();
+  </script>
 </body>
 </html>
