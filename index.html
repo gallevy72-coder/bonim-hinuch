@@ -39,7 +39,7 @@
 <link rel="preload" as="image" href="hero-bg.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Noto+Serif+Hebrew:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Frank+Ruhl+Libre:wght@300..900&family=Noto+Serif+Hebrew:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#F8F4EA;
@@ -603,6 +603,14 @@
   .hero-cta-ico svg{width:100%;height:100%;display:block}
   .hero-full .hero-cta-wa{background:linear-gradient(135deg,#25D366 0%,#12A150 100%);border-color:rgba(255,255,255,.45);color:#fff;box-shadow:0 14px 30px -14px rgba(18,161,80,.75)}
   .hero-full .hero-cta-wa:hover{background:linear-gradient(135deg,#1FBE5C 0%,#0E8C45 100%);border-color:#fff}
+  /* hero typography — Frank Ruhl Libre (Asimon-adjacent: same Frank-Ruehl roots) */
+  .hero-full .hero-title,
+  .hero-full .hero-subtitle,
+  .hero-full .hero-description{font-family:'Frank Ruhl Libre','Rubik',serif}
+  .hero-full .hero-title{font-weight:700;letter-spacing:0}
+  .hero-full .hero-subtitle{font-weight:600}
+  .hero-full .hero-description{font-weight:400}
+  .hero-full .hero-description strong{font-weight:700}
   .hero-actions-3 .hero-cta-tel{display:none}
   .hero-full .hero-gefen{display:inline-flex;align-items:center;justify-content:center;margin-top:22px;padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:15px;font-weight:700;text-shadow:0 1px 8px rgba(0,0,0,.25)}
   @media(max-width:768px){
