@@ -225,25 +225,30 @@
   .tree-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;align-items:center}
   .tree-list li{position:relative;font-size:18px;color:var(--ink);padding-right:28px}
   .tree-list li::before{content:'';position:absolute;right:0;top:50%;width:18px;height:18px;margin-top:-9px;border-radius:50%;background:var(--sage) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5 12.5 10 17 19 7'/%3E%3C/svg%3E") center/12px no-repeat}
-  .tree-label{position:relative;width:max-content;margin:0 auto;padding:44px 0 0;font-size:15px;font-weight:700;color:var(--sage-deep);text-align:center}
+  .tree-label{position:relative;width:max-content;max-width:100%;margin:0 auto;padding:44px 0 0;font-size:15px;font-weight:700;color:var(--sage-deep);text-align:center}
+  .tree-label span{font-weight:500;color:var(--ink-soft)}
   .tree-label::before{content:'';position:absolute;top:0;left:50%;width:2px;height:36px;margin-left:-1px;background:var(--tl)}
-  .tree-branches{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:14px;padding-top:40px}
-  .tree-branches::before{content:'';position:absolute;top:0;left:50%;width:2px;height:20px;margin-left:-1px;background:var(--tl)}
-  .tree-branches::after{content:'';position:absolute;top:20px;height:2px;left:calc((100% - 48px)/6);right:calc((100% - 48px)/6);background:var(--tl)}
-  .tree-branch{position:relative;display:flex;align-items:center;justify-content:center;min-height:96px;padding:22px 20px;background:var(--card);border:1px solid rgba(53,126,143,.22);border-radius:18px;text-align:center;box-shadow:0 2px 6px rgba(42,42,38,.04)}
-  .tree-branch::before{content:'';position:absolute;top:-20px;left:50%;width:2px;height:20px;margin-left:-1px;background:var(--tl)}
+  .tree-branches{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start;margin-top:10px;padding-top:80px}
+  .tree-fan{position:absolute;top:0;left:0;width:100%;height:120px;overflow:visible;pointer-events:none}
+  .tree-fan path{fill:none;stroke:var(--tl);stroke-width:2;vector-effect:non-scaling-stroke}
+  .tree-branch:nth-child(3){margin-top:40px}
+  .tree-branch{position:relative;display:flex;align-items:center;justify-content:center;min-height:96px;padding:22px 20px;background:var(--card);border:1px solid rgba(53,126,143,.22);border-radius:18px;text-align:center;box-shadow:0 2px 6px rgba(42,42,38,.04);transition:transform .25s ease,box-shadow .25s ease}
+  .tree-branch:hover{transform:translateY(-3px);box-shadow:0 10px 24px -12px rgba(42,42,38,.25)}
   .tree-branch::after{content:'';position:absolute;top:0;right:24px;left:24px;height:3px;border-radius:0 0 999px 999px;opacity:.75}
-  .tree-branch:nth-child(1)::after{background:#E7B64B}
-  .tree-branch:nth-child(2)::after{background:#357E8F}
-  .tree-branch:nth-child(3)::after{background:#D88A55}
+  .tree-branch:nth-child(2)::after{background:#E7B64B}
+  .tree-branch:nth-child(3)::after{background:#357E8F}
+  .tree-branch:nth-child(4)::after{background:#D88A55}
   .tree-branch-title{font-family:'Heebo','Rubik',sans-serif;font-size:20px;font-weight:600;color:var(--ink);line-height:1.35}
   @media(max-width:760px){
     .tree-root{padding:26px 22px 24px}
-    .tree-branches{grid-template-columns:1fr;gap:18px;padding-top:20px}
-    .tree-branches::before{height:100%;}
-    .tree-branches::after{display:none}
+    .tree-label{width:auto;margin:0;padding:22px 48px 0 0;text-align:right}
+    .tree-label::before{left:auto;right:30px;margin-left:0;height:100%}
+    .tree-fan{display:none}
+    .tree-branches{grid-template-columns:1fr;gap:14px;margin-top:0;padding-top:16px;padding-right:48px}
+    .tree-branches::before{content:'';position:absolute;top:0;right:30px;bottom:34px;width:2px;background:var(--tl)}
+    .tree-branch:nth-child(3){margin-top:0}
     .tree-branch{min-height:0;padding:20px 18px}
-    .tree-branch::before{display:none}
+    .tree-branch::before{content:'';position:absolute;top:50%;right:-18px;width:18px;height:2px;background:var(--tl)}
     .tree-branch-title{font-size:18px}
   }
   .journey{margin-top:34px;display:flex;flex-direction:column;gap:0}
@@ -784,8 +789,6 @@
   <section class="block" id="how">
     <div class="wrap">
       <div class="kicker reveal">איך זה עובד</div>
-      <h2 class="reveal">מסלול גמיש, בקצב שלך</h2>
-
       <div class="tree reveal d1">
         <div class="tree-root">
           <span class="tree-tag">נקודת פתיחה</span>
@@ -797,8 +800,13 @@
             <li>חשיבה על המשך בית ספרי</li>
           </ul>
         </div>
-        <p class="tree-label">אפשרויות להמשך</p>
+        <p class="tree-label">אפשרויות להמשך <span>· בוחרים אחת או יותר</span></p>
         <div class="tree-branches">
+          <svg class="tree-fan" viewBox="0 0 600 120" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M300 0 C300 55 100 25 100 80"/>
+            <path d="M300 0 L300 120"/>
+            <path d="M300 0 C300 55 500 25 500 80"/>
+          </svg>
           <div class="tree-branch"><span class="tree-branch-title">ליווי לבעלי תפקידים</span></div>
           <div class="tree-branch"><span class="tree-branch-title">קידום פרויקט ספציפי</span></div>
           <div class="tree-branch"><span class="tree-branch-title">ליווי מדריכי AI בית ספריים</span></div>
