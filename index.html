@@ -455,6 +455,9 @@
   .pain-list.rotating{display:grid;grid-template-columns:1fr;max-width:760px}
   .pain-list.rotating li{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease,visibility 0s linear .6s}
   .pain-list.rotating li.active{opacity:1;visibility:visible;transform:none;transition:opacity .6s ease,transform .6s ease,visibility 0s}
+  .pain-list.rotating li{background:none;border:none;box-shadow:none;border-radius:0;padding:10px 12px;overflow:visible;text-align:center;font-family:'Heebo','Rubik',sans-serif;font-size:clamp(24px,3vw,36px);line-height:1.5;font-weight:500;color:var(--ink)}
+  .pain-list.rotating li::before,.pain-list.rotating li::after{content:'"';position:static;display:inline;background:none;height:auto;opacity:1;font-family:'Heebo','Rubik',sans-serif;font-size:1.15em;font-weight:700;color:#D88A55;line-height:0;margin:0 .08em}
+  @media(max-width:600px){.pain-list.rotating li{font-size:22px;padding:6px 4px}}
   .pain-dots{display:flex;justify-content:center;gap:10px;margin-top:18px}
   .pain-dots button{width:10px;height:10px;padding:0;border:none;border-radius:50%;background:rgba(53,126,143,.25);cursor:pointer;transition:background .3s,transform .3s}
   .pain-dots button.active{background:#357E8F;transform:scale(1.25)}
