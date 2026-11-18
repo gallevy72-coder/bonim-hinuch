@@ -451,6 +451,14 @@
   .section-link{display:inline-block;margin-top:22px;color:var(--sage-deep);font-weight:700;text-decoration:none;border-bottom:2px solid rgba(53,126,143,0.25);transition:border-color .2s}
   .section-link:hover{border-bottom-color:var(--sage-deep)}
   #pain .section-link{display:table;margin-left:auto;margin-right:auto}
+  /* pain rotator — one sentence at a time (enabled by JS) */
+  .pain-list.rotating{display:grid;grid-template-columns:1fr;max-width:760px}
+  .pain-list.rotating li{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease,visibility 0s linear .6s}
+  .pain-list.rotating li.active{opacity:1;visibility:visible;transform:none;transition:opacity .6s ease,transform .6s ease,visibility 0s}
+  .pain-dots{display:flex;justify-content:center;gap:10px;margin-top:18px}
+  .pain-dots button{width:10px;height:10px;padding:0;border:none;border-radius:50%;background:rgba(53,126,143,.25);cursor:pointer;transition:background .3s,transform .3s}
+  .pain-dots button.active{background:#357E8F;transform:scale(1.25)}
+  @media(prefers-reduced-motion:reduce){.pain-list.rotating li{transition:none}}
   @media(min-width:760px){
     .pain-list{grid-template-columns:repeat(2,1fr);gap:16px}
   }
@@ -725,11 +733,11 @@
     <div class="wrap">
       <div class="kicker reveal">האתגר</div>
       <h2 class="pain-title reveal" style="color:#000;text-align:right">נשמע לך מוכר?</h2>
-      <ul class="pain-list">
-        <li class="reveal d1">אני מפספס המון דברים, בזמינות, בקביעת דברים קריטיים, כי רצים פה אלף ואחד דברים ביום.</li>
-        <li class="reveal d1">כרגע זה בית ספר שמתנהל כמו בשנות ה-20. מזכירה עם דפדפת, היא זוכרת את המערכות, אין לי כמעט שליטה על זה.</li>
-        <li class="reveal d2">קורים פה המון דברים טובים, אבל אין לנו סדר ואין לנו זיכרון ארגוני. כשצריך למצוא משהו, אף פעם לא יודעים איפה הוא נמצא.</li>
-        <li class="reveal d3">ברור לי ש-AI הולך לשנות את בית הספר, אבל אין לי זמן, שקט או דרך מעשית להבין מאיפה מתחילים.</li>
+      <ul class="pain-list reveal d1" id="pain-list">
+        <li>אני מפספס המון דברים, בזמינות, בקביעת דברים קריטיים, כי רצים פה אלף ואחד דברים ביום.</li>
+        <li>כרגע זה בית ספר שמתנהל כמו בשנות ה-20. מזכירה עם דפדפת, היא זוכרת את המערכות, אין לי כמעט שליטה על זה.</li>
+        <li>קורים פה המון דברים טובים, אבל אין לנו סדר ואין לנו זיכרון ארגוני. כשצריך למצוא משהו, אף פעם לא יודעים איפה הוא נמצא.</li>
+        <li>ברור לי ש-AI הולך לשנות את בית הספר, אבל אין לי זמן, שקט או דרך מעשית להבין מאיפה מתחילים.</li>
       </ul>
       <p class="pain-close reveal d4">הליווי נועד בדיוק בשביל זה:<br><strong style="color:#357E8F">להפוך את ה-AI מעוד נושא שצריך ללמוד לכלי עבודה אישי שמחזיר לך זמן, בהירות ויכולת להוביל</strong></p>
     </div>
@@ -1025,6 +1033,40 @@
     es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   },{threshold:.14,rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // pain sentences rotator — shows one at a time
+  (function(){
+    const list=document.getElementById('pain-list');
+    if(!list) return;
+    const items=[...list.querySelectorAll('li')];
+    if(items.length<2) return;
+    list.classList.add('rotating');
+    const dots=document.createElement('div');
+    dots.className='pain-dots';
+    items.forEach((_,i)=>{
+      const b=document.createElement('button');
+      b.type='button';
+      b.setAttribute('aria-label','משפט '+(i+1));
+      b.addEventListener('click',()=>{show(i);restart();});
+      dots.appendChild(b);
+    });
+    list.after(dots);
+    let idx=0,timer=null;
+    const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function show(i){
+      idx=i;
+      items.forEach((li,j)=>li.classList.toggle('active',j===i));
+      [...dots.children].forEach((d,j)=>d.classList.toggle('active',j===i));
+    }
+    function next(){show((idx+1)%items.length);}
+    function start(){ if(!reduce && !timer) timer=setInterval(next,5500); }
+    function stop(){ clearInterval(timer); timer=null; }
+    function restart(){ stop(); start(); }
+    [list,dots].forEach(el=>{
+      el.addEventListener('mouseenter',stop);
+      el.addEventListener('mouseleave',start);
+    });
+    show(0); start();
+  })();
   // testimonials carousel
   (function(){
     const carousel = document.getElementById('testimonial-carousel');
