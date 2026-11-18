@@ -217,7 +217,7 @@
   @media(min-width:760px){.phases{flex-direction:row;align-items:stretch;gap:10px}.phase{flex:1;padding:42px 22px 32px}.phase-arrow{flex:0 0 auto;padding:0 4px;align-self:center;font-size:22px}.phase-arrow::before{content:"←"}}
   /* JOURNEY MAP */
   /* how it works — root + branching options */
-  .tree{margin-top:40px;--tl:rgba(53,126,143,.45)}
+  .tree{margin-top:40px;margin-bottom:32px;--tl:rgba(53,126,143,.45)}
   .tree-root{position:relative;max-width:560px;margin:0 auto;background:var(--card);border:2px solid var(--sage);border-radius:24px;padding:30px 34px 28px;text-align:center;box-shadow:var(--shadow)}
   .tree-tag{display:inline-block;font-size:14px;font-weight:700;color:var(--sage);background:rgba(53,126,143,.1);border-radius:999px;padding:5px 14px;margin-bottom:12px}
   .tree-title{font-family:'Heebo','Rubik',sans-serif;font-size:clamp(26px,2.6vw,32px);font-weight:700;color:var(--ink);margin:0}
@@ -232,20 +232,21 @@
   .tree-fan{position:absolute;top:0;left:0;width:100%;height:120px;overflow:visible;pointer-events:none}
   .tree-fan path{fill:none;stroke:var(--tl);stroke-width:2;vector-effect:non-scaling-stroke}
   .tree-branch:nth-child(3){margin-top:40px}
-  .tree-branch{position:relative;display:flex;align-items:center;justify-content:center;min-height:96px;padding:22px 20px;background:var(--card);border:1px solid rgba(53,126,143,.22);border-radius:18px;text-align:center;box-shadow:0 2px 6px rgba(42,42,38,.04);transition:transform .25s ease,box-shadow .25s ease}
+  .tree-branch{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:96px;padding:22px 20px;background:var(--card);border:1px solid rgba(53,126,143,.22);border-radius:18px;text-align:center;box-shadow:0 2px 6px rgba(42,42,38,.04);transition:transform .25s ease,box-shadow .25s ease}
   .tree-branch:hover{transform:translateY(-3px);box-shadow:0 10px 24px -12px rgba(42,42,38,.25)}
   .tree-branch::after{content:'';position:absolute;top:0;right:24px;left:24px;height:3px;border-radius:0 0 999px 999px;opacity:.75}
   .tree-branch:nth-child(2)::after{background:#E7B64B}
   .tree-branch:nth-child(3)::after{background:#357E8F}
   .tree-branch:nth-child(4)::after{background:#D88A55}
   .tree-branch-title{font-family:'Heebo','Rubik',sans-serif;font-size:20px;font-weight:600;color:var(--ink);line-height:1.35}
+  .tree-branch-sub{display:block;margin-top:8px;font-size:15.5px;line-height:1.55;color:var(--ink-soft)}
   @media(max-width:760px){
     .tree-root{padding:26px 22px 24px}
     .tree-label{width:auto;margin:0;padding:22px 48px 0 0;text-align:right}
     .tree-label::before{left:auto;right:30px;margin-left:0;height:100%}
     .tree-fan{display:none}
     .tree-branches{grid-template-columns:1fr;gap:14px;margin-top:0;padding-top:16px;padding-right:48px}
-    .tree-branches::before{content:'';position:absolute;top:0;right:30px;bottom:34px;width:2px;background:var(--tl)}
+    .tree-branches::before{content:'';position:absolute;top:0;right:30px;bottom:46px;width:2px;background:var(--tl)}
     .tree-branch:nth-child(3){margin-top:0}
     .tree-branch{min-height:0;padding:20px 18px}
     .tree-branch::before{content:'';position:absolute;top:50%;right:-18px;width:18px;height:2px;background:var(--tl)}
@@ -807,9 +808,9 @@
             <path d="M300 0 L300 120"/>
             <path d="M300 0 C300 55 500 25 500 80"/>
           </svg>
-          <div class="tree-branch"><span class="tree-branch-title">ליווי לבעלי תפקידים</span></div>
-          <div class="tree-branch"><span class="tree-branch-title">קידום פרויקט ספציפי</span></div>
-          <div class="tree-branch"><span class="tree-branch-title">ליווי מדריכי AI בית ספריים</span></div>
+          <div class="tree-branch"><span class="tree-branch-title">ליווי לבעלי תפקידים</span><span class="tree-branch-sub">רכז פדגוגי, רכז מערכת, רכזי מקצוע וכדומה</span></div>
+          <div class="tree-branch"><span class="tree-branch-title">קידום פרויקט ספציפי</span><span class="tree-branch-sub">סיכום ישיבות, קשר עם הקהילה, תהליכי מיפוי וכדומה</span></div>
+          <div class="tree-branch"><span class="tree-branch-title">הכשרת מדריכי AI בית ספריים</span><span class="tree-branch-sub">להובלת הדרכות לצוות המורים</span></div>
         </div>
       </div>
     </div>
