@@ -166,5 +166,31 @@
   </div>
 </footer>
 
+<!-- visit notifications (ntfy) -->
+<script>
+(function(){
+  try{
+    var TOPIC='bonim-visits-6a67d7ea7987';
+    var q=location.search;
+    if(/[?&]me=1/.test(q)) localStorage.setItem('bh_me','1');
+    if(/[?&]me=0/.test(q)) localStorage.removeItem('bh_me');
+    if(localStorage.getItem('bh_me')==='1') return;
+    var ua=navigator.userAgent||'';
+    if(navigator.webdriver||/bot|crawl|spider|slurp|preview|lighthouse|headless/i.test(ua)) return;
+    var key='bh_seen_'+location.pathname;
+    if(sessionStorage.getItem(key)) return;
+    sessionStorage.setItem(key,'1');
+    var page=/^\/(index\.html)?$/.test(location.pathname)?'עמוד הבית':(document.title||location.pathname).replace(/\s*·\s*בונים חינוך.*$/,'').trim();
+    var ref='כניסה ישירה';
+    if(document.referrer){
+      try{var h=new URL(document.referrer).hostname.replace(/^www\./,'');
+        if(h!==location.hostname.replace(/^www\./,'')) ref='הגיע מ: '+h; else ref='ניווט בתוך האתר';}catch(e){}
+    }
+    var dev=/Mobi|Android|iPhone/i.test(ua)?'נייד':'מחשב';
+    fetch('https://ntfy.sh/',{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({topic:TOPIC,title:'ביקור חדש באתר',message:page+'\n'+ref+' · '+dev,tags:['eyes']})}).catch(function(){});
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
